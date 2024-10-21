@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-const char INPUT_FILENAME[] = "resources/g4_input.txt";
-const char RESULT_FILENAME[] = "resources/g4_result.txt";
+const char INPUT_FILENAME[] = "input.txt";
+const char RESULT_FILENAME[] = "output.txt";
 const int MAX_WORD_SIZE = 100;
 const int WORD_DELIMITER = 32;
 

@@ -3,8 +3,8 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-const char INPUT_FILENAME[] = "resources/g8_input.txt";
-const char RESULT_FILENAME[] = "resources/g8_result.txt";
+const char INPUT_FILENAME[] = "input.txt";
+const char RESULT_FILENAME[] = "output.txt";
 const int MAX_STRING_SIZE = 1000;
 
 int collectResult(signed char result[]) {
@@ -13,10 +13,13 @@ int collectResult(signed char result[]) {
 
     signed char ch = fgetc(inFile);
     while (ch != EOF && resultIdx < MAX_STRING_SIZE) {
-        if (isdigit(ch) || ch == ' ') {
+        if (isdigit(ch)) {
             result[resultIdx] = ch;
-            resultIdx++;
+        } else {
+            result[resultIdx] = ' ';
         }
+
+        resultIdx++;
 
         ch = fgetc(inFile);
     }
@@ -46,25 +49,25 @@ int convertToNumbers(signed char result[], int size, int numbers[]) {
     int numbersIdx = 0;
 
     while (token != NULL) {
-        numbers[numbersIdx] = atoi(token);    
-
+        if (isdigit(*token)) {
+            numbers[numbersIdx] = atoi(token);
+            numbersIdx++;
+        }
+            
         token = strtok(NULL, " ");
-        numbersIdx++;
     } 
 
     return numbersIdx;
 }
 
 void writeResult(int result[], int size) {
-    if (size == 0) {
-        return;
-    }
-    
     FILE *outFile = fopen(RESULT_FILENAME, "w");
 
-    fprintf(outFile, "%d", result[0]);
-    for (int i = 1; i < size; i++) {
-        fprintf(outFile, " %d", result[i]);
+    if (size > 0) {
+        fprintf(outFile, "%d", result[0]);
+        for (int i = 1; i < size; i++) {
+            fprintf(outFile, " %d", result[i]);
+        }
     }
 
     fclose(outFile);

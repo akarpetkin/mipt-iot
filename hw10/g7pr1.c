@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-const char INPUT_FILENAME[] = "resources/g7_input.txt";
-const char RESULT_FILENAME[] = "resources/g7_result.txt";
+const char INPUT_FILENAME[] = "input.txt";
+const char RESULT_FILENAME[] = "output.txt";
 const int MAX_STRING_SIZE = 10000;
 
 void collectResult(int *n, int *m) {
@@ -27,7 +27,7 @@ void collectResult(int *n, int *m) {
 
 void writeResult(int n, int m) {
     FILE *outFile = fopen(RESULT_FILENAME, "w");
-    fprintf(outFile, "%d %d\n", n, m);
+    fprintf(outFile, "%d %d", n, m);
 
     fclose(outFile);
 };

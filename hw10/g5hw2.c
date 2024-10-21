@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-const char INPUT_FILENAME[] = "resources/g5_input.txt";
-const char RESULT_FILENAME[] = "resources/g5_result.txt";
+const char INPUT_FILENAME[] = "input.txt";
+const char RESULT_FILENAME[] = "output.txt";
 const int MAX_STRING_SIZE = 1000;
 
 int collectResult(signed char result[]) {
@@ -39,9 +39,12 @@ int collectResult(signed char result[]) {
     return resultIdx;
 }
 
-void writeResut(signed char result[]) {
+void writeResut(signed char result[], int size) {
     FILE *outFile = fopen(RESULT_FILENAME, "w");
-    fprintf(outFile, "%s\n", result);
+
+    for (int i = 0; i < size; i++) {
+        fprintf(outFile, "%c", result[i]);
+    }
 
     fclose(outFile);
 };
@@ -50,7 +53,7 @@ int main(void) {
     signed char result[MAX_STRING_SIZE];
     int resultIdx = collectResult(result);
 
-    writeResut(result);
+    writeResut(result, resultIdx);
     
     return 0;         
 } 

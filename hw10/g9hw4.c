@@ -2,8 +2,8 @@
 #include <string.h>
 #include <ctype.h>
 
-const char INPUT_FILENAME[] = "resources/g9_input.txt";
-const char RESULT_FILENAME[] = "resources/g9_result.txt";
+const char INPUT_FILENAME[] = "input.txt";
+const char RESULT_FILENAME[] = "output.txt";
 const int MAX_STRING_SIZE = 1000;
 
 int getCharIndex(signed char ch, signed char st[], int size) {
@@ -36,7 +36,7 @@ void collectResult(signed char result[]) {
 
 void writeResut(signed char result[]) {
     FILE *outFile = fopen(RESULT_FILENAME, "w");
-    fprintf(outFile, "%s\n", result);
+    fprintf(outFile, "%s", result);
 
     fclose(outFile);
 };
