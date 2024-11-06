@@ -3,10 +3,16 @@
 #include <unistd.h>
 #include "temp_functions.h"
 
-#define DEFAULT_FILENAME "temperature_big.csv"
+void printUsage() {
+    printf("Usage: temp [options]\n");
+    printf("-h This help text.\n");
+    printf("-f Specify path to CSV file.\n");
+    printf("-m Specify month number (not required).\n\n");
+    printf("Example: temp -f temperature_big.csv\n");
+}
 
 int main(int argc, char *argv[]) {   
-    char *fileName = DEFAULT_FILENAME;
+    char *fileName = NULL;
     uint8_t selectedMonth = 0;
 
     int ch = 0;
@@ -22,15 +28,17 @@ int main(int argc, char *argv[]) {
                 break;
 
             case 'h': 
-                printf("Usage: temp [options]\n -h This help text\n");
-                printf("-f Specify path to CSV file (default is temperature_big.csv).\n");
-                printf("-m Specify month number (not required).\n\n");
-                printf("Example: %s -f temperature_big.csv\n", argv[0]);
+                printUsage();
                 return 0;
             case '?': 
                 printf("Unknown argument: %s Try -h for help\n", argv[optind-1]);
                 return 0;  
         }
+    }
+
+    if (fileName == NULL) {
+        printUsage();
+        return 0;
     }
 
     sensors_t sensors = loadFromCsv(fileName);
